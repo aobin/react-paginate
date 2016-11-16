@@ -3,16 +3,16 @@ import ReactDOM from "react-dom";
 import ReactPaginate from "react-paginate";
 import $ from "jquery";
 
-
 window.React = React;
 
 
-export class CommentList extends Component {
+export class FeedItems extends Component
+{
   render() {
-    let commentNodes = this.props.data.map(
-      function (comment, index) {
+    let items = this.props.data.map(
+      function (item, index) {
         return (
-          <div key={index}>{comment.comment}</div>
+          <li key={index}>{item.title}</li>
         );
       }
     );
@@ -20,16 +20,17 @@ export class CommentList extends Component {
     return (
       <div id="project-comments" className="commentList">
         <ul>
-          {commentNodes}
+          {items}
         </ul>
       </div>
     );
   }
-}
-;
+};
 
-export class App extends Component {
-  constructor(props) {
+export class FeedDocument extends Component
+{
+  constructor(props)
+  {
     super(props);
 
     this.state = {
@@ -38,22 +39,25 @@ export class App extends Component {
     }
   }
 
-  loadCommentsFromServer() {
+  loadCommentsFromServer()
+  {
     $.ajax
     (
       {
         url: this.props.url,
+        /* crossDomain: true,
+        headers: { 'Access-Control-Allow-Origin': '*' },*/
+        jsonp:'callback',
         data: {limit: this.props.perPage, offset: this.state.offset},
-        dataType: 'json',
+        /*dataType: 'json',*/
+        dataType:'jsonp',
         type: 'GET',
 
-        success: data =>
-        {
-          this.setState({data: data.comments, pageNum: Math.ceil(data.meta.total_count / data.meta.limit)});
+        success: data => {
+          this.setState({data: data.feedDocument.feedItems, pageNum: Math.ceil(data.meta.totalCount / data.meta.limit)});
         },
 
-        error: (xhr, status, err) =>
-        {
+        error: (xhr, status, err) => {
           console.error(this.props.url, status, err.toString());
         }
       }
@@ -79,8 +83,8 @@ export class App extends Component {
   {
     return (
       <div className="commentBox">
-        <CommentList data={this.state.data}/>
-        <ReactPaginate previousLabel={"previous2"}
+        <FeedItems data={this.state.data}/>
+        <ReactPaginate previousLabel={"previous"}
                        nextLabel={"next"}
                        breakLabel={<a href="">...</a>}
                        breakClassName={"break-me"}
@@ -94,12 +98,10 @@ export class App extends Component {
       </div>
     );
   }
-}
-;
+};
 
 ReactDOM.render(
-  <App url={'http://localhost:3000/comments'}
-       author={'adele'}
-       perPage={10}/>,
-  document.getElementById('react-paginate')
+  <FeedDocument url={'http://localhost:8080/feedItems'}
+       perPage={2}/>,
+  document.getElementById('feed-document')
 );

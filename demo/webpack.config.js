@@ -9,10 +9,23 @@ var dir_html = path.resolve(__dirname, 'html');
 var dir_build = path.resolve(__dirname, 'build');
 
 module.exports = {
-    entry: path.resolve(dir_js, 'demo.js'),
+    entry:
+      {
+        main:[
+/*          'webpack-dev-server/client?http://127.0.0.1:3000',
+          'webpack/hot/only-dev-server',*/
+          /*path.resolve(dir_js, 'demo.js'),*/
+          /*path.resolve(dir_js, 'feedItems.js')*/
+          path.resolve(dir_js, 'feedDocument.js')
+        ]
+
+      },
+
     output: {
         path: dir_build,
-        filename: 'demo.js',
+        /*filename: 'demo.js',*/
+        /*filename: 'feedItems.js',*/
+        filename: 'feedDocument.js',
         publicPath: 'build'
     },
     devServer: {

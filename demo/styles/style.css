@@ -11,3 +11,31 @@
 #react-paginate .break a {
     cursor: default;
 }
+
+#canvaslist{
+  list-style:none;
+  overflow: auto;
+  margin:0;
+  padding:0;
+  border:1px solid red;
+  zoom:1;
+  white-space: nowrap;
+  width: 100%;
+}
+.canvaslist li{
+  line-height:20px;
+  margin:5px 4px;
+  border:1px solid silver;
+  text-align:center;
+  display: inline;
+}
+
+/*#feed-document li {
+  background-color: #CCCCCC;
+  text-align: center;
+  float: left;
+  width: 70px;
+  margin: 3px;
+  padding: 3px;
+  list-style-type: none;
+}*/
