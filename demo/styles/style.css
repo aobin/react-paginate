@@ -30,12 +30,32 @@
   display: inline;
 }
 
-/*#feed-document li {
-  background-color: #CCCCCC;
-  text-align: center;
-  float: left;
-  width: 70px;
-  margin: 3px;
-  padding: 3px;
-  list-style-type: none;
-}*/
+h2.rss-title {
+  border: 2px solid #ccc;
+  padding: 10px 20px;
+  background: #eee;
+}
+
+.rss-section.show-inline {
+  display: inline-block;
+}
+
+.rss-section-img{
+  display: inline-block;
+}
+
+.rss-section-content {
+  display: inline-block;
+}
+
+.rss-section-content h3{
+  width: 200px;
+}
+
+.rss-section-content span{
+
+}
+
+.rss-section-content a{
+
+}
